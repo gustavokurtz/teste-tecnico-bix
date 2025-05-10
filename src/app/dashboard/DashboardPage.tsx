@@ -1,8 +1,19 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import {
+    Bar,
+    BarChart,
+    CartesianGrid,
+    Legend,
+    Line,
+    LineChart,
+    ResponsiveContainer,
+    Tooltip,
+    XAxis,
+    YAxis,
+} from "recharts";
 import transactionsData from "../../data/transactions.json";
-import { useRouter } from "next/navigation";
 
 interface Transaction {
   date: number;
@@ -96,10 +107,61 @@ export default function DashboardPage() {
     ));
   };
 
+  const barData = useMemo(() => {
+    const grouped: Record<string, { deposit: number; withdraw: number }> = {};
+    filtered.forEach((t) => {
+      const key = t.state;
+      if (!grouped[key]) grouped[key] = { deposit: 0, withdraw: 0 };
+      grouped[key][t.transaction_type] += Number(t.amount);
+    });
+    return Object.entries(grouped).map(([state, values]) => ({ state, ...values }));
+  }, [filtered]);
+
+  const lineData = useMemo(() => {
+    const grouped: Record<string, number> = {};
+    filtered.forEach((t) => {
+      const date = new Date(t.date);
+      const label = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, "0")}`;
+      grouped[label] = (grouped[label] || 0) + Number(t.amount);
+    });
+    return Object.entries(grouped).map(([date, total]) => ({ date, total }));
+  }, [filtered]);
+
   return (
     <div className="p-6 space-y-6">
       <h1 className="text-2xl font-bold">Dashboard Financeiro</h1>
 
+      {/* Gráficos */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="bg-white p-4 shadow rounded">
+          <h2 className="text-lg font-semibold mb-2">Receitas vs Despesas por Estado</h2>
+          <ResponsiveContainer width="100%" height={300}>
+            <BarChart data={barData}>
+              <XAxis dataKey="state" />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <Bar dataKey="deposit" stackId="a" fill="#22c55e" name="Receitas" />
+              <Bar dataKey="withdraw" stackId="a" fill="#ef4444" name="Despesas" />
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
+
+        <div className="bg-white p-4 shadow rounded">
+          <h2 className="text-lg font-semibold mb-2">Total movimentado por mês</h2>
+          <ResponsiveContainer width="100%" height={300}>
+            <LineChart data={lineData}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="date" />
+              <YAxis />
+              <Tooltip />
+              <Line type="monotone" dataKey="total" stroke="#3b82f6" name="Total" strokeWidth={2} />
+            </LineChart>
+          </ResponsiveContainer>
+        </div>
+      </div>
+
+      {/* Filtros */}
       <div className="flex flex-wrap gap-4">
         <select onChange={(e) => setFilter({ ...filter, type: e.target.value })} className="border p-2">
           <option value="">Todos os tipos</option>
