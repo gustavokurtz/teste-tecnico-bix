@@ -60,19 +60,24 @@ interface Transaction {
   state: string;
 }
 
-// Styled components modernizados
+// Styled components modernizados e otimizados para mobile
 const PageWrapper = styled.div`
-  padding: 2rem;
+  padding: 1rem;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1rem;
   max-width: 1600px;
   margin: 0 auto;
   width: 100%;
   
-  @media (max-width: 768px) {
+  @media (min-width: 640px) {
     padding: 1.5rem;
     gap: 1.5rem;
+  }
+  
+  @media (min-width: 1024px) {
+    padding: 2rem;
+    gap: 2rem;
   }
 `;
 
@@ -81,32 +86,59 @@ const PageHeader = styled.div`
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 0.75rem;
 `;
 
 const Title = styled.h1`
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: 700;
   color: ${theme.colors.text.primary};
   margin: 0;
+  
+  @media (min-width: 640px) {
+    font-size: 1.75rem;
+  }
+  
+  @media (min-width: 1024px) {
+    font-size: 2rem;
+  }
 `;
 
 const ChartsGrid = styled.div`
   display: grid;
-  gap: 2rem;
+  gap: 1rem;
   grid-template-columns: 1fr;
-  
+  min-width: 0;
+
+  @media (min-width: 640px) {
+    gap: 1.5rem;
+  }
+
   @media (min-width: 1024px) {
     grid-template-columns: 1fr 1fr;
+    gap: 2rem;
   }
+
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 `;
+
 
 const ChartCard = styled.div`
   background: ${theme.colors.surface};
-  padding: 1.5rem;
-  border-radius: ${theme.radius.lg};
+  padding: 1rem;
+  border-radius: ${theme.radius.md};
   box-shadow: ${theme.shadows.md};
   transition: ${theme.transition};
+  
+  @media (min-width: 640px) {
+    padding: 1.25rem;
+    border-radius: ${theme.radius.lg};
+  }
+  
+  @media (min-width: 1024px) {
+    padding: 1.5rem;
+  }
   
   &:hover {
     box-shadow: ${theme.shadows.lg};
@@ -114,46 +146,117 @@ const ChartCard = styled.div`
 `;
 
 const ChartHeader = styled.div`
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
+  
+  @media (min-width: 640px) {
+    margin-bottom: 1rem;
+  }
 `;
 
 const SubTitle = styled.h2`
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: ${theme.colors.text.primary};
-  margin: 0 0 0.5rem 0;
-`;
-
-const ChartDescription = styled.p`
-  font-size: 0.875rem;
-  color: ${theme.colors.text.secondary};
-  margin: 0;
-`;
-
-const FiltersSection = styled.div`
-  background: ${theme.colors.surface};
-  padding: 1.5rem;
-  border-radius: ${theme.radius.lg};
-  box-shadow: ${theme.shadows.md};
-`;
-
-const FiltersTitle = styled.h3`
   font-size: 1rem;
   font-weight: 600;
   color: ${theme.colors.text.primary};
-  margin: 0 0 1rem 0;
+  margin: 0 0 0.25rem 0;
+  
+  @media (min-width: 640px) {
+    font-size: 1.125rem;
+    margin: 0 0 0.375rem 0;
+  }
+  
+  @media (min-width: 1024px) {
+    font-size: 1.25rem;
+    margin: 0 0 0.5rem 0;
+  }
+`;
+
+const ChartDescription = styled.p`
+  font-size: 0.75rem;
+  color: ${theme.colors.text.secondary};
+  margin: 0;
+  
+  @media (min-width: 640px) {
+    font-size: 0.875rem;
+  }
+`;
+
+const ChartContainer = styled.div`
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  min-width: 0;
+  height: 250px;
+
+  @media (min-width: 640px) {
+    height: 275px;
+  }
+
+  @media (min-width: 1024px) {
+    height: 300px;
+  }
+`;
+
+
+const FiltersSection = styled.div`
+  background: ${theme.colors.surface};
+  padding: 1rem;
+  border-radius: ${theme.radius.md};
+  box-shadow: ${theme.shadows.md};
+  
+  @media (min-width: 640px) {
+    padding: 1.25rem;
+    border-radius: ${theme.radius.lg};
+  }
+  
+  @media (min-width: 1024px) {
+    padding: 1.5rem;
+  }
+`;
+
+const FiltersTitle = styled.h3`
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: ${theme.colors.text.primary};
+  margin: 0 0 0.75rem 0;
+  
+  @media (min-width: 640px) {
+    font-size: 1rem;
+    margin: 0 0 1rem 0;
+  }
 `;
 
 const FiltersWrapper = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+  min-width: 0;
+
+  @media (min-width: 640px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media (min-width: 1280px) {
+    grid-template-columns: repeat(6, 1fr);
+  }
+
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 `;
+
 
 const FilterGroup = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.375rem;
+  
+  @media (min-width: 640px) {
+    gap: 0.5rem;
+  }
 `;
 
 const FilterLabel = styled.label`
@@ -164,14 +267,18 @@ const FilterLabel = styled.label`
 
 const Select = styled.select`
   border: 1px solid ${theme.colors.border};
-  padding: 0.625rem 0.75rem;
+  padding: 0.5rem;
   border-radius: ${theme.radius.sm};
-  min-width: 10rem;
+  width: 100%;
   color: ${theme.colors.text.primary};
   background-color: ${theme.colors.surface};
   outline: none;
   transition: ${theme.transition};
   font-size: 0.875rem;
+  
+  @media (min-width: 640px) {
+    padding: 0.625rem 0.75rem;
+  }
   
   &:focus {
     border-color: ${theme.colors.primary};
@@ -181,13 +288,18 @@ const Select = styled.select`
 
 const DateInput = styled.input`
   border: 1px solid ${theme.colors.border};
-  padding: 0.625rem 0.75rem;
+  padding: 0.5rem;
   border-radius: ${theme.radius.sm};
+  width: 100%;
   color: ${theme.colors.text.primary};
   background-color: ${theme.colors.surface};
   outline: none;
   transition: ${theme.transition};
   font-size: 0.875rem;
+  
+  @media (min-width: 640px) {
+    padding: 0.625rem 0.75rem;
+  }
   
   &:focus {
     border-color: ${theme.colors.primary};
@@ -196,22 +308,25 @@ const DateInput = styled.input`
 `;
 
 const SummaryGrid = styled.div`
-  display: grid;
-  gap: 1rem;
-  grid-template-columns: repeat(1, 1fr);
-  
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+
   @media (min-width: 640px) {
+    display: grid;
     grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
   }
-  
+
   @media (min-width: 1024px) {
     grid-template-columns: repeat(4, 1fr);
   }
 `;
 
+
 const SummaryCard = styled.div<{ $variant: string }>`
   background: ${theme.colors.surface};
-  padding: 1.5rem;
+  padding: 1rem;
   border-radius: ${theme.radius.md};
   border-left: 4px solid ${({ $variant }) => {
     switch ($variant) {
@@ -224,59 +339,124 @@ const SummaryCard = styled.div<{ $variant: string }>`
   box-shadow: ${theme.shadows.sm};
   transition: ${theme.transition};
   
+  @media (min-width: 640px) {
+    padding: 1.25rem;
+  }
+  
+  @media (min-width: 1024px) {
+    padding: 1.5rem;
+  }
+  
   &:hover {
     box-shadow: ${theme.shadows.md};
   }
 `;
 
 const CardLabel = styled.div`
-  font-size: 0.875rem;
+  font-size: 0.75rem;
   font-weight: 500;
   color: ${theme.colors.text.secondary};
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.375rem;
+  
+  @media (min-width: 640px) {
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+  }
 `;
 
 const CardValue = styled.div`
-  font-size: 1.5rem;
+  font-size: 1.125rem;
   font-weight: 700;
   color: ${theme.colors.text.primary};
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  
+  @media (min-width: 640px) {
+    font-size: 1.25rem;
+  }
+  
+  @media (min-width: 1024px) {
+    font-size: 1.5rem;
+  }
 `;
 
 const TableCard = styled.div`
   background: ${theme.colors.surface};
-  padding: 1.5rem;
-  border-radius: ${theme.radius.lg};
+  padding: 1rem;
+  border-radius: ${theme.radius.md};
   box-shadow: ${theme.shadows.md};
   overflow-x: auto;
+  
+  @media (min-width: 640px) {
+    padding: 1.25rem;
+    border-radius: ${theme.radius.lg};
+  }
+  
+  @media (min-width: 1024px) {
+    padding: 1.5rem;
+  }
 `;
 
 const TableHeader = styled.div`
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1rem;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+  
+  @media (min-width: 640px) {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
 `;
 
 const TableTitle = styled.h3`
-  font-size: 1.25rem;
+  font-size: 1rem;
   font-weight: 600;
   color: ${theme.colors.text.primary};
   margin: 0;
+  
+  @media (min-width: 640px) {
+    font-size: 1.125rem;
+  }
+  
+  @media (min-width: 1024px) {
+    font-size: 1.25rem;
+  }
 `;
 
 const TableInfo = styled.div`
-  font-size: 0.875rem;
+  font-size: 0.75rem;
   color: ${theme.colors.text.secondary};
+  
+  @media (min-width: 640px) {
+    font-size: 0.875rem;
+  }
+`;
+
+const TableWrapper = styled.div`
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 0 -1rem;
+  padding: 0 1rem;
+  
+  @media (min-width: 640px) {
+    margin: 0;
+    padding: 0;
+  }
 `;
 
 const Table = styled.table`
   width: 100%;
   border-collapse: separate;
   border-spacing: 0;
+  min-width: 650px;
 `;
 
 const Th = styled.th`
-  padding: 0.875rem 1rem;
+  padding: 0.75rem;
   text-align: left;
   color: ${theme.colors.text.secondary};
   font-weight: 500;
@@ -285,6 +465,11 @@ const Th = styled.th`
   letter-spacing: 0.025em;
   background: ${theme.colors.background};
   border-bottom: 1px solid ${theme.colors.border};
+  white-space: nowrap;
+  
+  @media (min-width: 640px) {
+    padding: 0.875rem 1rem;
+  }
   
   &:first-child {
     border-top-left-radius: ${theme.radius.sm};
@@ -296,10 +481,16 @@ const Th = styled.th`
 `;
 
 const Td = styled.td`
-  padding: 1rem;
+  padding: 0.75rem;
   border-bottom: 1px solid ${theme.colors.border};
   color: ${theme.colors.text.primary};
-  font-size: 0.875rem;
+  font-size: 0.75rem;
+  white-space: nowrap;
+  
+  @media (min-width: 640px) {
+    padding: 1rem;
+    font-size: 0.875rem;
+  }
 `;
 
 const TableRow = styled.tr`
@@ -317,7 +508,7 @@ const TableRow = styled.tr`
 const TransactionType = styled.span<{ $type: string }>`
   display: inline-flex;
   align-items: center;
-  padding: 0.25rem 0.5rem;
+  padding: 0.25rem 0.375rem;
   border-radius: ${theme.radius.sm};
   font-size: 0.75rem;
   font-weight: 500;
@@ -331,26 +522,41 @@ const TransactionType = styled.span<{ $type: string }>`
       ? theme.colors.success 
       : theme.colors.danger
   };
+  
+  @media (min-width: 640px) {
+    padding: 0.25rem 0.5rem;
+  }
 `;
 
 const PaginationWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
+  gap: 0.375rem;
   justify-content: center;
-  margin-top: 1.5rem;
+  margin-top: 1rem;
+  
+  @media (min-width: 640px) {
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+  }
 `;
 
 const PageButton = styled.button<{ $active?: boolean }>`
-  padding: 0.5rem 0.75rem;
+  padding: 0.375rem 0.5rem;
   border: 1px solid ${({ $active }) => $active ? theme.colors.primary : theme.colors.border};
   border-radius: ${theme.radius.sm};
   background: ${({ $active }) => ($active ? theme.colors.primary : theme.colors.surface)};
   color: ${({ $active }) => ($active ? "#fff" : theme.colors.text.primary)};
   cursor: pointer;
-  font-size: 0.875rem;
+  font-size: 0.75rem;
   font-weight: 500;
   transition: ${theme.transition};
+  min-width: 2rem;
+  
+  @media (min-width: 640px) {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+  }
   
   &:hover:not(:disabled) {
     background: ${({ $active }) => $active ? theme.colors.primary : theme.colors.background};
@@ -364,7 +570,7 @@ const PageButton = styled.button<{ $active?: boolean }>`
 `;
 
 const EmptyTable = styled.div`
-  padding: 3rem 0;
+  padding: 2rem 0;
   text-align: center;
   color: ${theme.colors.text.secondary};
   font-size: 0.875rem;
