@@ -9,5 +9,5 @@ export async function POST() {
     expires: new Date(0), // expira imediatamente
   });
 
-  return NextResponse.redirect(new URL("/login"));
+  return NextResponse.redirect("/login");
 }
