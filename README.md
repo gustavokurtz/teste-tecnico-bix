@@ -1,6 +1,6 @@
 # Dashboard Financeiro - Teste Técnico BIX
 
-![Dashboard Preview](./public/dashboard-preview.png)
+![Dashboard Preview](/dashboard-preview.png)
 
 
 
