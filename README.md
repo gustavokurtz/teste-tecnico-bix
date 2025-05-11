@@ -1,6 +1,7 @@
 # Dashboard Financeiro - Teste Técnico BIX
 
-![Dashboard Preview](./public/dashboard-preview.png)
+![Dashboard Preview](https://raw.githubusercontent.com/gustavokurtz/teste-tecnico-bix/master/public/dashboard-preview.png)
+
 
 
 
